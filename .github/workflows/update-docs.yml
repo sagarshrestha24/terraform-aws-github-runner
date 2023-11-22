@@ -1,10 +1,13 @@
 name: Update docs
 on:
   push:
+    branches:
+      - npalm/docs
     paths:
       - "**/*.tf"
       - "**/*.md"
       - ".github/workflows/update-docs.yml"
+      - "mkdocs.yaml"
 
 permissions:
   contents: write
@@ -19,14 +22,42 @@ jobs:
       - name: Checkout with GITHUB Action token
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # ratchet:actions/checkout@v4
 
-      - name: Generate TF docs
+      - name: Generate TF docs (root)
+        uses: terraform-docs/gh-actions@f6d59f89a280fa0a3febf55ef68f146784b20ba0 # ratchet:terraform-docs/gh-actions@v1.0.0
+        with:
+          git-push: false
+          working-dir: .
+          output-file: main.md
+
+      - name: Generate TF docs (modules)
         uses: terraform-docs/gh-actions@f6d59f89a280fa0a3febf55ef68f146784b20ba0 # ratchet:terraform-docs/gh-actions@v1.0.0
         with:
           find-dir: .
-          git-commit-message: "docs: auto update terraform docs"
-          git-push: ${{ github.ref != 'refs/heads/main' || github.repository_owner != 'philips-labs' }}
+          git-push: false
+          working-dir: modules
+          output-file: main.md
 
-      # change docs via PR in case of locked main branch
+      - name: Generate TF docs (examples)
+        uses: terraform-docs/gh-actions@f6d59f89a280fa0a3febf55ef68f146784b20ba0 # ratchet:terraform-docs/gh-actions@v1.0.0
+        with:
+          find-dir: .
+          git-push: false
+          working-dir: examples
+          output-file: main.md
+
+      - name: copy terraform documentation to docs dir
+        run: |
+          bash .github/workflows/copy-docs.sh
+
+      - name: Commit and push changes
+        #if: github.ref != 'refs/heads/main' || github.repository_owner != 'philips-labs'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -mm "docs: auto update terraform docs"
+          git push
+
+          # change docs via PR in case of locked main branch
       - name: Create Pull Request (main branch only)
         if: github.ref == 'refs/heads/main' && github.repository_owner == 'philips-labs'
         uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # ratchet:peter-evans/create-pull-request@v5.0.2
@@ -38,3 +69,25 @@ jobs:
           branch-suffix: random
           base: ${{ github.event.pull_request.base.ref }}
           delete-branch: true
+
+
+  deploy-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+      - uses: actions/cache@v3
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --force -b npalm/test
