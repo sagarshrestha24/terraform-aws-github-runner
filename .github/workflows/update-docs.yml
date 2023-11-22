@@ -54,7 +54,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          gid add --all docs/generated
+          git add --all docs/generated
           if ! git diff --quiet; then
             git commit -m "docs: auto update terraform docs" . ||
             git push
