@@ -47,7 +47,7 @@ jobs:
 
       - name: copy terraform documentation to docs dir
         run: |
-          bash .github/workflows/copy-docs.sh
+          bash .ci/copy-docs.sh
 
       - name: Commit and push changes
         #if: github.ref != 'refs/heads/main' || github.repository_owner != 'philips-labs'
