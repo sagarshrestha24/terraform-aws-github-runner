@@ -46,10 +46,14 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git status
           git add docs/generated
           if ! git diff --quiet; then
             git commit -m "docs: auto update terraform docs" . ||
             echo git push
+          else
+            echo "nothing to commit"
+            git status
           fi
       - name: Create Pull Request (main branch only)
         if: github.ref == 'refs/heads/main' && github.repository_owner == 'philips-labs'
