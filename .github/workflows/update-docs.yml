@@ -54,10 +54,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -mm "docs: auto update terraform docs"
-          git push
-
-          # change docs via PR in case of locked main branch
+          if ! git diff --quiet; then
+            git commit -mm "docs: auto update terraform docs" ||
+            git push
+          fi
       - name: Create Pull Request (main branch only)
         if: github.ref == 'refs/heads/main' && github.repository_owner == 'philips-labs'
         uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # ratchet:peter-evans/create-pull-request@v5.0.2
