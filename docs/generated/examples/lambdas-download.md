@@ -1,3 +1,4 @@
+<!-- This file is generated. Do not edit! -->
 # Wrapper module to download lambda's for running the examples
 
 Module is used by examples to download Lambda distribution from the GitHub release.

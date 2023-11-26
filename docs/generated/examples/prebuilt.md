@@ -1,3 +1,4 @@
+<!-- This file is generated. Do not edit! -->
 # Action runners deployment with prebuilt image
 
 This module shows how to create GitHub action runners using a prebuilt AMI for the runners.

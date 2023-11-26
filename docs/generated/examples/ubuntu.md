@@ -1,3 +1,4 @@
+<!-- This file is generated. Do not edit! -->
 # Action runners deployment ubuntu example
 
 This module shows how to create GitHub action runners using an Ubuntu AMI. Lambda release will be downloaded from GitHub.

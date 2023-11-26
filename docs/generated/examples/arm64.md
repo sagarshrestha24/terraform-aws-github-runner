@@ -1,3 +1,4 @@
+<!-- This file is generated. Do not edit! -->
 # Action runners deployment with ARM64 architecture
 
 This module shows how to create GitHub action runners using AWS Graviton instances which have ARM64 architecture. Lambda release will be downloaded from GitHub.

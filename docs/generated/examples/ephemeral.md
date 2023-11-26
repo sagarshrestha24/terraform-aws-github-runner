@@ -1,3 +1,4 @@
+<!-- This file is generated. Do not edit! -->
 # Action runners deployment ephemeral example
 
 This example is based on the default setup, but shows how runners can be used with the ephemeral flag enabled. Once enabled, ephemeral runners will be used for one job only. Each job requires a fresh instance. This feature should be used in combination with the `workflow_job` event. See GitHub webhook endpoint configuration(link needed here). It is also suggested to use a pre-build AMI to minimize runner launch times.
