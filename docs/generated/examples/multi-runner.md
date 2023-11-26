@@ -1,4 +1,3 @@
-<!-- This file is generated. Do not edit! -->
 # Action runners deployment of Multiple-Runner-Configurations-Together example
 
 This module shows how to create GitHub action runners with multiple runner configuration together in one deployment. This example has the configurations for the following runner types with the relevant labels supported by them as matchers:

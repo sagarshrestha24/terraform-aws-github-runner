@@ -1,10 +1,11 @@
-
-
 site_name: GitHub Self-Hosted AWS Runners
 
 repo_name: terraform-aws-github-runner
 repo_url: https://github.com/philips-labs/terraform-aws-github-runner
 use_directory_urls: false
+
+plugins:
+  - blog:
 
 
 theme:
@@ -27,20 +28,25 @@ nav:
   - Introduciton: index.md
   - Configuration: configuration.md
   - Setup: setup.md
+  - Security: security.md
   - Modules:
-    - Runners (root): modules/runners.md
-    - Multi Runners: modules/multi-runners.md
+    - Runners (root): generated/modules/public/runners.md
+    - Multi Runners: generated/modules/public/multi-runner.md
+    - AMI Housekeeper: generated/modules/public/ami-housekeeper.md
+    - Lambda Downloader: generated/modules/public/download-lambda.md
     - Internal:
-      - Runner: generated/modules/internal/runner.md
+      - Runner: generated/modules/internal/runners.md
       - Syncer: generated/modules/internal/runner-binaries-syncer.md
       - SSM: generated/modules/internal/ssm.md
       - Webhook: generated/modules/internal/webhook.md
+      - Webhooik GitHub App:: generated/modules/internal/webhook-github-app.md
   - Examples:
     - Oeverview: examples.md
     - Default: generated/examples/default.md
     - Multiple: generated/examples/multi-runner.md
     - Ephemeral: generated/examples/ephemeral.md
-    - Ubuntu: generated/examples/ubuntu.md
+    - Ubuntu: generated/examples/arm64.md
+    - ARM64: generated/examples/ubuntu.md
     - Windows: generated/examples/windows.md
     - Custom AMI: generated/examples/prebuilt.md
     - Lambda download: generated/examples/lambdas-download.md

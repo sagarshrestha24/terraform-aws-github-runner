@@ -1,4 +1,3 @@
-<!-- This file is generated. Do not edit! -->
 # Action runners deployed with permissions boundary
 
 This module shows how to create GitHub action runners with permissions boundaries and paths used in role, policies, and instance profiles.

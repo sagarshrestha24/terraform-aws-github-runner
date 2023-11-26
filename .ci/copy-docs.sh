@@ -33,7 +33,8 @@ function copy_readme {
 # copy for all subdirs in examples the READM.md file to the docs directory and replace the filename by the name of the dir with extension md
 
 copy_readme examples docs/generated/examples "examples/base"
-copy_readme modules docs/generated/internal "multi-runner,ami-housekeeper,download-lambda"
+copy_readme modules docs/generated/modules/internal "multi-runner,ami-housekeeper,download-lambda,setup-iam-permissions,"
+copy_readme modules docs/generated/modules/public "webhook,runner-binaries-syncer,runners,ssm,webhook-github-app"
 
 
   # for dir in $(find examples -mindepth 1 -maxdepth 1 -type d); do

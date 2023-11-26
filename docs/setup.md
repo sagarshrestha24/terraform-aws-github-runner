@@ -136,3 +136,14 @@ Finally you need to ensure the app is installed to all or selected repositories.
 Go back to the GitHub App and update the following settings.
 
 1. In the "Install App" section, install the App in your organization, either in all or in selected repositories.
+
+
+## Debugging
+
+In case the setup does not work as intended follow the trace of events:
+
+- In the GitHub App configuration, the Advanced page displays all webhook events that were sent.
+- In AWS CloudWatch, every lambda has a log group. Look at the logs of the `webhook` and `scale-up` lambdas.
+- In AWS SQS you can see messages available or in flight.
+- Once an EC2 instance is running, you can connect to it in the EC2 user interface using Session Manager (use `enable_ssm_on_runners = true`). Check the user data script using `cat /var/log/user-data.log`. By default several log files of the instances are streamed to AWS CloudWatch, look for a log group named `<environment>/runners`. In the log group you should see at least the log streams for the user data installation and runner agent.
+- Registered instances should show up in the Settings - Actions page of the repository or organization (depending on the installation mode).

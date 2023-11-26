@@ -1,4 +1,3 @@
-<!-- This file is generated. Do not edit! -->
 # Action runners deployment windows example
 
 This module shows how to create GitHub action runners using an Windows Runners. Lambda release will be downloaded from GitHub.
