@@ -31,10 +31,10 @@ nav:
     - Runners (root): modules/runners.md
     - Multi Runners: modules/multi-runners.md
     - Internal:
-      - Runner: modules/internal/runner.md
-      - Syncer: modules/internal/runner-binaries-syncer.md
-      - SSM: modules/internal/ssm.md
-      - Webhook: modules/internal/webhook.md
+      - Runner: generated/modules/internal/runner.md
+      - Syncer: generated/modules/internal/runner-binaries-syncer.md
+      - SSM: generated/modules/internal/ssm.md
+      - Webhook: generated/modules/internal/webhook.md
   - Examples:
     - Oeverview: examples.md
     - Default: generated/examples/default.md
