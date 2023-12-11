@@ -10,7 +10,6 @@ use_directory_urls: false
 plugins:
   - blog:
 
-
 theme:
   name: material
   palette:

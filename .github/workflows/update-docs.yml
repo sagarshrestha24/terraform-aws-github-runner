@@ -65,7 +65,7 @@ jobs:
 
 
   deploy-pages:
-    # needs: [docs]
+    needs: [docs]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
