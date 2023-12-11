@@ -49,6 +49,8 @@ jobs:
           git status
           git add --all docs/generated
           git status
+          ls -ld .git/objects
+          chmod -R u+w .git/objects
           git commit -m "docs: auto update terraform docs" .
           git push
           git status
