@@ -21,6 +21,8 @@ theme:
         icon: material/weather-sunny
         name: Switch to dark mode
   features:
+    - content.action.edit
+    - content.code.copy
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
