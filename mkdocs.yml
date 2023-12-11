@@ -1,6 +1,6 @@
 site_name: GitHub Self-Hosted AWS Runners
 
-repo_name: terraform-aws-github-runner
+repo_name: philips-labs/terraform-aws-github-runner
 repo_url: https://github.com/philips-labs/terraform-aws-github-runner
 use_directory_urls: false
 
@@ -21,8 +21,9 @@ theme:
         icon: material/weather-sunny
         name: Switch to dark mode
   features:
-    - content.action.edit
     - content.code.copy
+    - content.action.edit
+    - content.action.view
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
