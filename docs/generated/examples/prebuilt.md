@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Action runners deployment with prebuilt image
 
 This module shows how to create GitHub action runners using a prebuilt AMI for the runners.

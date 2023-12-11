@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Module - IAM setup for using boundaries
 
 This module is optional and only added as example. You can deploy the root terraform module via you own IAM user with the right credentials. Alternatively you can create a role to deploy the root module with a limit boundary set.

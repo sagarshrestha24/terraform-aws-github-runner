@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Module - GitHub App web hook
 
 > This module is treated as internal module, breaking changes will not trigger a major release bump.

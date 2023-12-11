@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Wrapper module to download lambda's for running the examples
 
 Module is used by examples to download Lambda distribution from the GitHub release.

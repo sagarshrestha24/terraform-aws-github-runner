@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Action runners deployment ubuntu example
 
 This module shows how to create GitHub action runners using an Ubuntu AMI. Lambda release will be downloaded from GitHub.

@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Module - Download lambda artifacts
 
 This module is optional and provides an option to download via Terraform the Lambda artifacts from GitHub.

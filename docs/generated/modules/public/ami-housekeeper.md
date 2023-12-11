@@ -1,4 +1,4 @@
-<!-- This file is generated. Do not edit! -->
+<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
 # Module - AMI Housekeeper
 
 This module deploys a Lambda function responsible for deleting outdated AMIs. You can specify various criteria for the deletion process. Please note that the creation of AMIs is not within the scope of this project; the Lambda's role is solely to remove old ones. To avoid potential conflicts, it is recommended to deploy this module only once.
