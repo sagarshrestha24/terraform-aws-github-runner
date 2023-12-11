@@ -23,7 +23,7 @@ function copy_readme {
       cp README.md ../../$2/$(basename $dir).md
 
       # inject the folloing comment on the top <!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
-      sed -i '1s;^;<!-- This file is generated. Do not edit! -->\n;' ../../$2/$(basename $dir).md
+      sed -i '1s;^;<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->\n;' ../../$2/$(basename $dir).md
       popd >/dev/null
     fi
   done
