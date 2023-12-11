@@ -39,4 +39,4 @@ Permission are managed in several places. Below are the most important ones. For
 - The scale up lambda should have access to EC2 for creating and tagging instances.
 - The scale down lambda should have access to EC2 to terminate instances.
 
-Besides these permissions, the lambdas also need permission to CloudWatch (for logging and scheduling), SSM and S3. For more details about the required permissions see the [documentation](./generated/modules/modules/public/setup-iam-permissions.md) of the IAM module which uses permission boundaries.
+Besides these permissions, the lambdas also need permission to CloudWatch (for logging and scheduling), SSM and S3. For more details about the required permissions see the [documentation](./generated/modules/public/setup-iam-permissions.md) of the IAM module which uses permission boundaries.
