@@ -44,10 +44,9 @@ jobs:
       - name: Commit and push changes
         #if: github.ref != 'refs/heads/main' || github.repository_owner != 'philips-labs'
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git status
-          sudo chmod -R u+w .git/objects
           git add --all docs/generated
           git status
           git commit -m "docs: auto update terraform docs" .
