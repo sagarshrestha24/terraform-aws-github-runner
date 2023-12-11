@@ -44,13 +44,12 @@ jobs:
       - name: Commit and push changes
         #if: github.ref != 'refs/heads/main' || github.repository_owner != 'philips-labs'
         run: |
+          sudo chown -R $(id -u):$(id -g) .git/objects
           git config --global user.name ${{ github.actor }}
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git status
           git add --all docs/generated
           git status
-          ls -ld .git/objects
-          chmod -R u+w .git/objects
           git commit -m "docs: auto update terraform docs" .
           git push
           git status
