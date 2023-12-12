@@ -457,6 +457,11 @@ The examples are using standard AMI's for different operation systems. Instances
 
 We welcome any improvement to the standard module to make the default as secure as possible. But in the end it remains your responsibility to keep your environment secure.
 
+
+<details>
+<summary>Terraform root module documention</summary>
+<!-- --8<-- [start:mkdocsrunners] -->
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -625,6 +630,9 @@ We welcome any improvement to the standard module to make the default as secure 
 | <a name="output_ssm_parameters"></a> [ssm\_parameters](#output\_ssm\_parameters) | n/a |
 | <a name="output_webhook"></a> [webhook](#output\_webhook) | n/a |
 <!-- END_TF_DOCS -->
+<!-- --8<-- [end:mkdocsrunners] -->
+
+</details>
 
 ## Contributing
 

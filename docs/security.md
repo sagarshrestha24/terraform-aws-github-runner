@@ -8,3 +8,9 @@ Ephemeral runners are using the JIT configuration, confguration that only can be
 The examples are using standard AMI's for different operation systems. Instances are not hardened, and sudo operation are not blocked. To provide an out of the box working experience by default the module installs and configures the runner. However secrets are not hard coded, they finally end up in the memory of the instances. You can harden the instance by providing your own AMI and overwriting the cloud-init script.
 
 We welcome any improvement to the standard module to make the default as secure as possible, in the end it remains your responsibility to keep your environment secure.
+
+
+--8<-- "README.md"
+
+
+test

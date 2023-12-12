@@ -5,8 +5,7 @@ repo_url: https://github.com/philips-labs/terraform-aws-github-runner
 edit_uri: edit/npalm/mkdocs/docs/
 use_directory_urls: false
 
-plugins:
-  - blog:
+
 
 theme:
   name: material
@@ -26,13 +25,18 @@ theme:
     - navigation.instant
     - navigation.instant.progress
     - navigation.tracking
+    - pymdownx.snippets
+
+markdown_extensions:
+  - pymdownx.snippets:
+      check_paths: true
 nav:
   - Introduciton: index.md
   - Configuration: configuration.md
   - Setup: setup.md
   - Security: security.md
   - Modules:
-    - Runners (root): generated/modules/public/runners.md
+    - Runners (root): modules/runners.md
     - Multi Runners: generated/modules/public/multi-runner.md
     - AMI Housekeeper: generated/modules/public/ami-housekeeper.md
     - Lambda Downloader: generated/modules/public/download-lambda.md
@@ -44,7 +48,7 @@ nav:
       - Webhooik GitHub App:: generated/modules/internal/webhook-github-app.md
   - Examples:
     - Oeverview: examples.md
-    - Default: generated/examples/default.md
+    - Default: default.md
     - Multiple: generated/examples/multi-runner.md
     - Ephemeral: generated/examples/ephemeral.md
     - Ubuntu: generated/examples/arm64.md
