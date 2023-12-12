@@ -1,17 +1,5 @@
 #!/usr/bin/env bash
 
-
-copy_and_inject_comment() {
-  local dir="$1"
-  local filename="$2"
-  local destination="../../$3/$(basename "$dir")/$filename"
-
-  pushd "$dir" >/dev/null
-  cp "$filename" "$destination"
-  sed -i "1s;^;<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/$filename -->\n;" "$destination"
-  popd >/dev/null
-}
-
 # function to copy for all subdirs on the first level the README.md file to the target dir and rename the file to name of the dir
 # also inject a line on the top of the file <!-- This file is generated. Do not edit! -->
 # and exclude the base dir as well the exclsuion list
@@ -30,7 +18,13 @@ function copy_readme {
 
     # Check if the subdirectory exists in Git
     if git rev-parse --is-inside-work-tree &>/dev/null && git ls-files --error-unmatch "$dir" &>/dev/null; then
-      copy_and_inject_comment "$dir" "README.md" "$2"
+      echo "Copying README.md from ${dir} to $2"
+      pushd "$dir" >/dev/null
+      cp README.md ../../$2/$(basename $dir).md
+
+      # inject the folloing comment on the top <!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->
+      sed -i "1s;^;<!-- This file is generated. Do not edit! PLEASE edit https://github.com/philips-labs/terraform-aws-github-runner/blob/main/$dir/README.md -->\n;" ../../$2/$(basename $dir).md
+      popd >/dev/null
     fi
   done
 }
@@ -41,3 +35,32 @@ function copy_readme {
 copy_readme examples docs/generated/examples "examples/base"
 copy_readme modules docs/generated/modules/internal "multi-runner,ami-housekeeper,download-lambda,setup-iam-permissions,"
 copy_readme modules docs/generated/modules/public "webhook,runner-binaries-syncer,runners,ssm,webhook-github-app"
+
+
+  # for dir in $(find examples -mindepth 1 -maxdepth 1 -type d); do
+  #   # ignore dirs that are contained in $1
+  #   if [[ "$1" == *$(basename $dir)* ]]; then
+  #     echo MATCH
+  #     continue
+  #   fi
+  #   echo no match $dir
+  # done
+
+
+# for dir in $(find examples -mindepth 1 -maxdepth 2 -type d); do
+#   # ignore dir base
+#   if [[ "$dir" == "examples/base" ]]; then
+#     continue
+#   fi
+#   # Check if the subdirectory exists in Git
+#   if git rev-parse --is-inside-work-tree &>/dev/null && git ls-files --error-unmatch "$dir" &>/dev/null; then
+#     echo "Copying README.md from ${dir} to docs"
+#     pushd "$dir" >/dev/null
+#     cp README.md ../../docs/examples/$(basename $dir).md
+
+#     # inject the folloing comment on the top <!-- This file is generated. Do not edit! -->
+#     sed -i '1s;^;<!-- This file is generated. Do not edit! -->\n;' ../../docs/examples/$(basename $dir).md
+#     popd >/dev/null
+#   fi
+# done
+
