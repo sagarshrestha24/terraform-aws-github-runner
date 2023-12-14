@@ -31,7 +31,7 @@ variable "runner_config" {
     matcherConfig = object({
       labelMatchers = list(list(string))
       exactMatch    = bool
-      priority      = optional(number, 999)
+      priority      = number
     })
   }))
   validation {
