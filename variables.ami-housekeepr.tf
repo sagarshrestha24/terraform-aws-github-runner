@@ -34,7 +34,7 @@ variable "ami_housekeeper_lambda_schedule_expression" {
   type        = string
   default     = "rate(1 day)"
 }
-
+/*
 variable "ami_housekeeper_cleanup_config" {
   description = <<EOF
     Configuration for AMI cleanup.
@@ -68,3 +68,4 @@ variable "ami_housekeeper_cleanup_config" {
   })
   default = {}
 }
+*/
