@@ -271,18 +271,22 @@ variable "logging_kms_key_id" {
 variable "block_device_mappings" {
   description = "The EC2 instance block device configuration. Takes the following keys: `device_name`, `delete_on_termination`, `volume_type`, `volume_size`, `encrypted`, `iops`, `throughput`, `kms_key_id`, `snapshot_id`."
   type = list(object({
-    delete_on_termination = optional(bool, true)
-    device_name           = optional(string, "/dev/xvda")
-    encrypted             = optional(bool, true)
-    iops                  = optional(number)
-    kms_key_id            = optional(string)
-    snapshot_id           = optional(string)
-    throughput            = optional(number)
+    delete_on_termination = bool
+    device_name           = string
+    encrypted             = bool
+    iops                  = number
     volume_size           = number
-    volume_type           = optional(string, "gp3")
+    volume_type           =  string
   }))
   default = [{
     volume_size = 30
+    encrypted = true
+    device_name = "/dev/xvda"
+    volume_type = "gp3"
+    delete_on_termination = true
+    iops = null
+
+
   }]
 }
 
@@ -735,12 +739,17 @@ variable "enable_user_data_debug_logging_runner" {
 variable "ssm_paths" {
   description = "The root path used in SSM to store configuration and secrets."
   type = object({
-    root       = optional(string, "github-action-runners")
-    app        = optional(string, "app")
-    runners    = optional(string, "runners")
-    use_prefix = optional(bool, true)
+    root       = string
+    app        = string
+    runners    = ostring
+    use_prefix = bool
   })
-  default = {}
+  default = {
+    root       = "github-action-runners"
+    app        = "app"
+    runners    = "runners"
+    use_prefix = true
+  }
 }
 
 variable "runner_name_prefix" {
@@ -756,11 +765,15 @@ variable "runner_name_prefix" {
 variable "tracing_config" {
   description = "Configuration for lambda tracing."
   type = object({
-    mode                  = optional(string, null)
-    capture_http_requests = optional(bool, false)
-    capture_error         = optional(bool, false)
+    mode                  = string
+    capture_http_requests = bool
+    capture_error         = bool
   })
-  default = {}
+  default = {
+    mode                  = null
+    capture_http_requests = false
+    capture_error         = false
+  }
 }
 
 variable "runner_credit_specification" {
@@ -796,14 +809,23 @@ variable "runners_ssm_housekeeper" {
   `config`: configuration for the lambda function. Token path will be read by default from the module.
   EOF
   type = object({
-    schedule_expression = optional(string, "rate(1 day)")
-    enabled             = optional(bool, true)
-    lambda_timeout      = optional(number, 60)
+    schedule_expression = string
+    enabled             = bool
+    lambda_timeout      = number
     config = object({
-      tokenPath      = optional(string)
-      minimumDaysOld = optional(number, 1)
-      dryRun         = optional(bool, false)
+      tokenPath      = string
+      minimumDaysOld = number
+      dryRun         = bool
     })
   })
-  default = { config = {} }
+  default = { 
+    schedule_expression = "rate(1 day)"
+    enabled             = true
+    lambda_timeout      = 60
+    config = {
+      tokenPath      = null
+      minimumDaysOld = 1
+      dryRun         = false
+    } 
+}
 }
