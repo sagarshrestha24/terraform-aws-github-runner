@@ -127,11 +127,15 @@ variable "lambda_architecture" {
 variable "tracing_config" {
   description = "Configuration for lambda tracing."
   type = object({
-    mode                  = optional(string, null)
-    capture_http_requests = optional(bool, false)
-    capture_error         = optional(bool, false)
+    mode                  = string
+    capture_http_requests = bool
+    capture_error         = bool
   })
-  default = {}
+  default = {
+    mode                  = null
+    capture_http_requests = false
+    capture_error         = false
+  }
 }
 
 # specif for this module
