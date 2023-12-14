@@ -245,7 +245,7 @@ variable "idle_config" {
     cron             = string
     timeZone         = string
     idleCount        = number
-    evictionStrategy = optional(string, "oldest_first")
+    evictionStrategy = string
   }))
   default = []
 }
