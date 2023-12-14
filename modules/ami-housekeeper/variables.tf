@@ -154,7 +154,7 @@ variable "cleanup_config" {
     `ssmParameterNames` - SSM parameter names to use when searching for AMIs to cleanup. This parameter should be set when using SSM to configure the AMI to use. Default no SSM parameters.
   EOF
   type = object({
-    amiFilters = optional(list(object({
+    amiFilters = list(object({
       Name   = string
       Values = list(string)
       })),
@@ -166,12 +166,11 @@ variable "cleanup_config" {
           Name : "image-type",
           Values : ["machine"],
       }]
-    )
-    dryRun              = optional(bool, false)
-    launchTemplateNames = optional(list(string))
-    maxItems            = optional(number)
-    minimumDaysOld      = optional(number, 30)
-    ssmParameterNames   = optional(list(string))
+    dryRun              = bool
+    launchTemplateNames = list(string)
+    maxItems            = number
+    minimumDaysOld      = 30
+    ssmParameterNames   = list(string)
   })
   default = {}
 }
