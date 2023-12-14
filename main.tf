@@ -351,7 +351,5 @@ module "ami_housekeeper" {
 
   role_path                 = var.role_path
   role_permissions_boundary = var.role_permissions_boundary
-
-  cleanup_config             = var.ami_housekeeper_cleanup_config
   lambda_schedule_expression = var.ami_housekeeper_lambda_schedule_expression
 }
