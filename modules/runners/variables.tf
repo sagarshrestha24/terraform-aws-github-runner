@@ -47,18 +47,22 @@ variable "s3_runner_binaries" {
 variable "block_device_mappings" {
   description = "The EC2 instance block device configuration. Takes the following keys: `device_name`, `delete_on_termination`, `volume_type`, `volume_size`, `encrypted`, `iops`, `throughput`, `kms_key_id`, `snapshot_id`."
   type = list(object({
-    delete_on_termination = optional(bool, true)
-    device_name           = optional(string, "/dev/xvda")
-    encrypted             = optional(bool, true)
-    iops                  = optional(number)
-    kms_key_id            = optional(string)
-    snapshot_id           = optional(string)
-    throughput            = optional(number)
+    delete_on_termination = bool
+    device_name           = string
+    encrypted             = bool
+    iops                  = number
     volume_size           = number
-    volume_type           = optional(string, "gp3")
+    volume_type           =  string
   }))
   default = [{
     volume_size = 30
+    encrypted = true
+    device_name = "/dev/xvda"
+    volume_type = "gp3"
+    delete_on_termination = true
+    iops = null
+
+
   }]
 }
 
@@ -287,7 +291,6 @@ variable "idle_config" {
     cron             = string
     timeZone         = string
     idleCount        = number
-    evictionStrategy = optional(string, "oldest_first")
   }))
   default = []
 }
@@ -570,18 +573,23 @@ variable "runner_name_prefix" {
   default     = ""
   validation {
     condition     = length(var.runner_name_prefix) <= 45
-    error_message = "The prefix used for the GitHub runner name must be less than 32 characters. AWS instances id are 17 chars, https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html"
+    error_message = "The prefix used for the GitHub runner name must be limited to fewer than 32 characters. Please choose a shorter prefix. AWS instance IDs, for reference, are typically 17 characters long."
+
   }
 }
 
 variable "tracing_config" {
   description = "Configuration for lambda tracing."
   type = object({
-    mode                  = optional(string, null)
-    capture_http_requests = optional(bool, false)
-    capture_error         = optional(bool, false)
+    mode                  = string
+    capture_http_requests = bool
+    capture_error         = bool
   })
-  default = {}
+  default = {
+    mode                  = null
+    capture_http_requests = false
+    capture_error         = false
+  }
 }
 
 
@@ -618,16 +626,25 @@ variable "ssm_housekeeper" {
   `config`: configuration for the lambda function. Token path will be read by default from the module.
   EOF
   type = object({
-    schedule_expression = optional(string, "rate(1 day)")
-    enabled             = optional(bool, true)
-    lambda_timeout      = optional(number, 60)
+    schedule_expression = string
+    enabled             = bool
+    lambda_timeout      = number
     config = object({
-      tokenPath      = optional(string)
-      minimumDaysOld = optional(number, 1)
-      dryRun         = optional(bool, false)
+      tokenPath      = string
+      minimumDaysOld = number
+      dryRun         = bool
     })
   })
-  default = { config = {} }
+  default = { 
+    schedule_expression = "rate(1 day)"
+    enabled             = true
+    lambda_timeout      = 60
+    config = {
+      tokenPath      = null
+      minimumDaysOld = 1
+      dryRun         = false
+    } 
+  }
 }
 
 variable "enable_on_demand_failover_for_errors" {
