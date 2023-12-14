@@ -741,7 +741,7 @@ variable "ssm_paths" {
   type = object({
     root       = string
     app        = string
-    runners    = ostring
+    runners    = string
     use_prefix = bool
   })
   default = {
@@ -758,7 +758,7 @@ variable "runner_name_prefix" {
   default     = ""
   validation {
     condition     = length(var.runner_name_prefix) <= 45
-    error_message = "The prefix used for the GitHub runner name must be less than 32 characters. AWS instances id are 17 chars, https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html"
+    error_message = "The prefix used for the GitHub runner name must be limited to fewer than 32 characters. Please choose a shorter prefix. AWS instance IDs, for reference, are typically 17 characters long."
   }
 }
 
