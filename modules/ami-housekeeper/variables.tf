@@ -141,7 +141,7 @@ variable "lambda_schedule_expression" {
   type        = string
   default     = "rate(1 day)"
 }
-
+/*
 variable "cleanup_config" {
   description = <<EOF
     Configuration for AMI cleanup.
@@ -174,3 +174,4 @@ variable "cleanup_config" {
   })
   default = {}
 }
+*/
