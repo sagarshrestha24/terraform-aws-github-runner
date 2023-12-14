@@ -21,7 +21,6 @@ resource "aws_lambda_function" "ami_housekeeper" {
     variables = {
       LOG_LEVEL                                = var.log_level
       POWERTOOLS_LOGGER_LOG_EVENT              = var.log_level == "debug" ? "true" : "false"
-      AMI_CLEANUP_OPTIONS                      = jsonencode(var.cleanup_config)
       SERVICE_NAME                             = "ami-housekeeper"
       POWERTOOLS_TRACE_ENABLED                 = var.tracing_config.mode != null ? true : false
       POWERTOOLS_TRACER_CAPTURE_HTTPS_REQUESTS = var.tracing_config.capture_http_requests
