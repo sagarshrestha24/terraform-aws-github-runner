@@ -136,6 +136,7 @@ module "webhook" {
       matcherConfig : {
         labelMatchers : [local.runner_labels]
         exactMatch : var.enable_runner_workflow_job_labels_check_all
+        priority      = var.matcher_priority
       }
     }
   }
