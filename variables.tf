@@ -1,3 +1,8 @@
+variable "matcher_priority" {
+  description = "Priority for the matcherConfig block"
+  type        = number
+  default     = 10 # Set a default value or adjust as needed
+}
 variable "aws_region" {
   description = "AWS region."
   type        = string
